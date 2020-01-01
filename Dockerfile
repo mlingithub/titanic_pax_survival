@@ -1,5 +1,5 @@
 FROM continuumio/anaconda3
 COPY . /app
 WORKDIR /app
-CMD python main.py
+CMD python main.py 
 
