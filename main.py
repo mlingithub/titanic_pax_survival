@@ -1,6 +1,6 @@
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-train = pd.read_csv('.data/Data-Titanic/train.csv')
+train = pd.read_csv('.data/Data-titanic/train.csv')
 train['Sex'] = train['Sex'].apply(lambda x: 1 if x == 'male' else 0)
 train['Age'] = train['Age'].fillna(np.mean(train['Age']))
 train['Fare'] = train['Fare'].fillna(np.mean(train['Fare']))
