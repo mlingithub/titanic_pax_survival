@@ -5,6 +5,8 @@ on:
     paths: 
       - "**.py"
       - '!.github/**.py'
+    branches:
+      - !deploy
 
 jobs:
   build:
