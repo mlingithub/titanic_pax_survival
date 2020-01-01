@@ -38,17 +38,6 @@ jobs:
                     git submodule update --init --recursive >/dev/null 2>/dev/null
                     git lfs pull >/dev/null 2>/dev/null
                 fi
-                cd ..
-                wiki_folder="${GITHUB_REPOSITORY##*/}.wiki"
-                if [ ! -d $wiki_folder ] ; then
-                    git clone https://github.com/"$GITHUB_REPOSITORY.wiki".git 2>/dev/null
-                    cd $wiki_folder
-                    git checkout master 2>/dev/null
-                else
-                    cd $wiki_folder
-                    git checkout master >/dev/null 2>/dev/null
-                    git pull --all >/dev/null 2>/dev/null
-                fi
                 docker build --tag $branch .
                 docker run -v ~/Desktop/$repo_folder:/app -p 5000:5000 $branch
                 git add . >/dev/null 2>/dev/null
