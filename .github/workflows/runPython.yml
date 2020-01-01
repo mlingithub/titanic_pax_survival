@@ -3,7 +3,7 @@ name: runPython
 on: 
   push:
     paths: 
-      - "**.py"
+      - "**.yml"
       - '!.github/**.py'
 
 jobs:
@@ -41,10 +41,11 @@ jobs:
                 cd ..
                 wiki_folder="${GITHUB_REPOSITORY##*/}.wiki"
                 echo $wiki_folder
+                echo https://github.com/"{$GITHUB_REPOSITORY}.wiki"
                 if [ ! -d $wiki_folder ] ; then
-                    git clone https://github.com/"{$GITHUB_REPOSITORY}.wiki".git >/dev/null 2>/dev/null
+                    git clone https://github.com/"{$GITHUB_REPOSITORY}.wiki".git
                     cd $wiki_folder
-                    git checkout master >/dev/null 2>/dev/null
+                    git checkout master >/dev/null
                 else
                     cd $wiki_folder
                     git checkout master >/dev/null 2>/dev/null
