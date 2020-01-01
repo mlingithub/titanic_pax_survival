@@ -10,13 +10,11 @@ wiki_folder=sys.argv[3]
 
 #read md
 os.system("cd {0} && git add . && git pull --all".format(home+'/Desktop/'+wiki_folder))
-f = open(home+'/Desktop/titanic_pax_survival.wiki/experiment.md', 'r')
+f = open(home+'/Desktop/'+wiki_folder+'/experiment.md', 'r')
 htmlmarkdown=markdown.markdown( f.read() )
 f.close()
-htmlmarkdown
 existing_lines=pd.read_html(htmlmarkdown,index_col=False)[0]
 existing_lines=existing_lines.iloc[:,1:]
-existing_lines
 
 #get data
 dt_string = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
