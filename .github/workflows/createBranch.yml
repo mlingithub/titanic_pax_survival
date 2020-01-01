@@ -1,5 +1,5 @@
 name: createBranch
-on: create
+on: 
 
 jobs:
   build:
