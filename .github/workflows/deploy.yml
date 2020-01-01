@@ -1,9 +1,9 @@
 name: Deploy
 
-on: push
-#  push:
-#    branches: 
-#      - deploy
+on:
+  push:
+    branches: 
+      - deploy
   
 jobs:
   build:
