@@ -1,9 +1,9 @@
 name: Deploy
 
-on: 
-  push:
-    branches: 
-      - deploy
+on: push
+#  push:
+#    branches: 
+#      - deploy
   
 jobs:
   build:
@@ -17,22 +17,22 @@ jobs:
       uses: actions/setup-python@v1.1.1
     - run : |
         git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
-        git lfs pull --include "*.pickle" >/dev/null 2>/dev/null
-        git checkout $GITHUB_HEAD_REF >/dev/null 2>/dev/null
+        git lfs pull --include "*.pickle" 
+        git checkout $GITHUB_HEAD_REF 
         cd ..
         if [ ! -d mlgithubdeploy ] ; then
-          git clone ${{ secrets.deploymenturl }} >/dev/null 2>/dev/null
-          cd mlgithubdeploy >/dev/null 2>/dev/null
-          git checkout master >/dev/null 2>/dev/null
+          git clone ${{ secrets.deploymenturl }} 
+          cd mlgithubdeploy 
+          git checkout master 
         else
-          cd mlgithubdeploy >/dev/null 2>/dev/null
-          git checkout master >/dev/null 2>/dev/null
-          git pull --all >/dev/null 2>/dev/null
+          cd mlgithubdeploy 
+          git checkout master 
+          git pull --all 
         fi
-        git config --global user.email "ahbilal@microsoft.com" >/dev/null 2>/dev/null
-        git config --global user.name "Ahmed Bilal" >/dev/null 2>/dev/null
+        git config --global user.email "ahbilal@microsoft.com" 
+        git config --global user.name "Ahmed Bilal" l
         cp -a ../titanic_pax_survival/.github/deploy/. .
         cp ../titanic_pax_survival/.artifacts/model.pickle .
-        git add . >/dev/null 2>/dev/null
-        git commit -m "$GITHUB_SHA" >/dev/null 2>/dev/null
+        git add . 
+        git commit -m "$GITHUB_SHA"
         git push ${{ secrets.deploymenturl }} master >/dev/null 2>/dev/null
