@@ -1,0 +1,28 @@
+name: runNB
+
+on: 
+  push:
+    paths: 
+      - "**.ipynb"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: configuring notebook
+      uses: appleboy/ssh-action@master
+      with:
+        host: mlgithub.westus2.cloudapp.azure.com
+        username: ${{ secrets.Azure_user }}
+        password: ${{ secrets.Azure_password }}
+        port: 22
+        envs: GITHUB_REPOSITORY,GITHUB_REF
+        script: |
+                branch=${GITHUB_REF##*/}
+                repo_folder=${GITHUB_REPOSITORY##*/}
+                #cp ~/Desktop/config/copyTemplate.py ~/Desktop/$repo_folder
+                cd ~/Desktop/$repo_folder
+                git checkout $branch 2>/dev/null
+                /data/anaconda/envs/py35/bin/python3 .github/copyTemplate.py $repo_folder $branch

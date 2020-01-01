@@ -1,0 +1,39 @@
+name: Deploy
+
+on: 
+  pull_request:
+    branches: 
+      - master
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checking out
+      uses: actions/checkout@v1
+    - name: setup Python environment
+      uses: actions/setup-python@v1.1.1
+    - name: deploying model
+      run : |
+        git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+        git lfs pull --include "*.pickle" >/dev/null 2>/dev/null
+        git checkout $GITHUB_HEAD_REF >/dev/null 2>/dev/null
+        cd ..
+        if [ ! -d mlgithubdeploy ] ; then
+          git clone ${{ secrets.deploymenturl }} >/dev/null 2>/dev/null
+          cd mlgithubdeploy >/dev/null 2>/dev/null
+          git checkout master >/dev/null 2>/dev/null
+        else
+          cd mlgithubdeploy >/dev/null 2>/dev/null
+          git checkout master >/dev/null 2>/dev/null
+          git pull --all >/dev/null 2>/dev/null
+        fi
+        git config --global user.email "ahbilal@microsoft.com" >/dev/null 2>/dev/null
+        git config --global user.name "Ahmed Bilal" >/dev/null 2>/dev/null
+        cp -a ../titanic_pax_survival/.github/deploy/. .
+        cp ../titanic_pax_survival/.artifacts/model.pickle .
+        git add . >/dev/null 2>/dev/null
+        git commit -m "$GITHUB_SHA" >/dev/null 2>/dev/null
+        git push ${{ secrets.deploymenturl }} master >/dev/null 2>/dev/null
