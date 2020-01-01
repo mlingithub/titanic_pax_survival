@@ -6,7 +6,7 @@ on:
       - "**.py"
       - '!.github/**.py'
     branches:
-      - !deploy
+      - '!deploy'
 
 jobs:
   build:
