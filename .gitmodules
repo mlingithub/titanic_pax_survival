@@ -1,1 +1,4 @@
 
+[submodule ".data/Data-titanic"]
+	path = .data/Data-titanic
+	url = https://github.com/mlingithub/Data-titanic
