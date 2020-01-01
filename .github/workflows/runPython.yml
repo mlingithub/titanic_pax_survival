@@ -41,9 +41,9 @@ jobs:
                 cd ..
                 wiki_folder="${GITHUB_REPOSITORY##*/}.wiki"
                 if [ ! -d $wiki_folder ] ; then
-                    git clone https://github.com/"$GITHUB_REPOSITORY.wiki".git
+                    git clone https://github.com/"$GITHUB_REPOSITORY.wiki".git 2>/dev/null
                     cd $wiki_folder
-                    git checkout master >/dev/null
+                    git checkout master 2>/dev/null
                 else
                     cd $wiki_folder
                     git checkout master >/dev/null 2>/dev/null
