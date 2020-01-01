@@ -42,7 +42,7 @@ jobs:
                 wiki_folder="${GITHUB_REPOSITORY##*/}.wiki"
                 echo $wiki_folder
                 if [ ! -d $wiki_folder ] ; then
-                    git clone https://github.com/$GITHUB_REPOSITORY.git >/dev/null 2>/dev/null
+                    git clone https://github.com/"{$GITHUB_REPOSITORY}.wiki".git >/dev/null 2>/dev/null
                     cd $wiki_folder
                     git checkout master >/dev/null 2>/dev/null
                 else
