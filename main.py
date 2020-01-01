@@ -1,4 +1,4 @@
-import numpy as np # linear algebra
+import numpy as np # linear
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 train = pd.read_csv('.data/Data-titanic/train.csv')
 train['Sex'] = train['Sex'].apply(lambda x: 1 if x == 'male' else 0)
