@@ -14,7 +14,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.10, random
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
-classifier=GaussianNB()
+classifier=RandomForestClassifier()
 classifier.fit(X_train, y_train)
 from sklearn.metrics import accuracy_score
 print('Training accuracy...', accuracy_score(y_train, classifier.predict(X_train)))
