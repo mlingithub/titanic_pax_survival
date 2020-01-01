@@ -1,7 +1,7 @@
-- name:
+- name: titanic data set
   source:
-    server:
-    url:
+    server: github
+    url: https://github.com/mlingithub/Data-titanic
     user:
     pwd:
     files_to_download:
