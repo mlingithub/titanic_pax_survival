@@ -35,4 +35,5 @@ jobs:
         cp ../titanic_pax_survival/.artifacts/model.pickle .
         git add . 
         git commit -m "$GITHUB_SHA"
-        git push ${{ secrets.deploymenturl }} master >/dev/null 2>/dev/null
+        git push ${{ secrets.deploymenturl }} master
+        # >/dev/null 2>/dev/null
